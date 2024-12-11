@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import DetailedCountdown from './DetailedCountdown';
 import Footer from './Footer';
+import Typewriter from 'typewriter-effect';
 
 function App() {
   const calculateTimeLeft = () => {
@@ -69,9 +70,24 @@ function App() {
     <div id="app-container">
       <div id="main-content">
         <div id="countdown">
-          <p className="current-date">Date: {currentDate}</p>
+          <p className="current-date">Today: {currentDate}</p>
           <div id="countdown-content">
-            <h1>{daysLeft === 0 ? "Merry Christmas!" : `Christmas in ${daysLeft} ${dayOrDays}`}</h1>
+            <h1>
+              {daysLeft === 14 ? (
+                <div className="merry-christmas-container">
+                <Typewriter
+                  options={{
+                    strings: ['Merry Christmas!'],
+                    autoStart: true,
+                    loop: true,
+                    delay: 100, 
+                  }}
+                />
+                </div>
+              ) : (
+                `Christmas in ${daysLeft} ${dayOrDays}`
+              )}
+              </h1>
             <p className="christmas-date">{formattedChristmasDate}</p>
             <DetailedCountdown timeLeft={timeLeft} />
           </div>
