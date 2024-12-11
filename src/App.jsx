@@ -73,7 +73,7 @@ function App() {
           <p className="current-date">Today: {currentDate}</p>
           <div id="countdown-content">
             <h1>
-              {daysLeft === 14 ? (
+              {daysLeft === 0 ? (
                 <div className="merry-christmas-container">
                 <Typewriter
                   options={{
