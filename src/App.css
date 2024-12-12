@@ -1,5 +1,5 @@
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(to bottom, #222, #333);
   margin: 0;
   padding: 0;
@@ -27,7 +27,8 @@ body {
 #countdown {
   background: rgba(255, 255, 255, 0.15);
   border-radius: 20px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2), inset 0 -6px 20px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2),
+    inset 0 -6px 20px rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(15px);
   padding: 20px;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -41,20 +42,20 @@ body {
 
 #countdown .current-date {
   font-size: 1em;
-  margin-bottom: 10px;
-  .text-shadow;
+  margin: 10px 0 10px 0;
+  text-shadow: 1px 1px 2px #000;
 }
 
 #countdown h1 {
-  font-size: 2em;
+  font-size: clamp(1rem, 2.5vw, 3rem);
   margin-bottom: 10px;
-  .text-shadow;
+  text-shadow: 1px 1px 2px #000;
 }
 
 #countdown .christmas-date {
   font-size: 1em;
   margin-bottom: 10px;
-  .text-shadow;
+  text-shadow: 1px 1px 2px #000;
 }
 
 .detailed-countdown {
@@ -75,7 +76,7 @@ body {
   font-size: 1.5em;
   font-weight: bold;
   display: block;
-  .text-shadow;
+  text-shadow: 1px 1px 2px #000;
 }
 
 .time span:last-child {
@@ -87,6 +88,7 @@ body {
 #footer {
   background-color: #333;
   padding: 10px;
+  text-align: center;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -100,20 +102,29 @@ body {
     width: 90%;
   }
   #countdown h1 {
-    font-size: 1.5em;
+    /* font-size: 1.5em; */
+    font-size: clamp(1em, 6vw, 1.5em);
   }
-  .time {
+  #countdown .current-date,
+  #countdown .christmas-date {
+    font-size: 0.9em;
+  }
+  #countdown .time {
     font-size: 1.2em;
     margin: 5px;
   }
-  .time span:first-child {
+  #countdown .time span:first-child {
     font-size: 1.2em;
   }
-  .time span:last-child {
+  #countdown .time span:last-child {
     font-size: 0.6em;
   }
   .detailed-countdown {
     justify-content: space-around;
     flex-wrap: wrap;
+  }
+  #footer p {
+    font-size: 0.9em;
+    justify-content: center;
   }
 }

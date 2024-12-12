@@ -1,18 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
-import DetailedCountdown from './DetailedCountdown';
-import Footer from './Footer';
-import Typewriter from 'typewriter-effect';
+import { useState, useEffect } from "react";
+import "./App.css";
+import DetailedCountdown from "./DetailedCountdown";
+import Footer from "./Footer";
+import Typewriter from "typewriter-effect";
 
 function App() {
   const calculateTimeLeft = () => {
     const now = new Date();
-    const christmas = new Date(now.getFullYear() + (now > new Date(now.getFullYear(), 11, 25) ? 1 : 0), 11, 25);
+    const christmas = new Date(
+      now.getFullYear() + (now > new Date(now.getFullYear(), 11, 25) ? 1 : 0),
+      11,
+      25
+    );
     const diffTime = Math.abs(christmas - now);
 
     const days = Math.max(0, Math.floor(diffTime / (1000 * 60 * 60 * 24)));
-    const hours = Math.max(0, Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
-    const minutes = Math.max(0, Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60)));
+    const hours = Math.max(
+      0,
+      Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+    );
+    const minutes = Math.max(
+      0,
+      Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60))
+    );
     const seconds = Math.max(0, Math.floor((diffTime % (1000 * 60)) / 1000));
 
     return {
@@ -25,7 +35,11 @@ function App() {
 
   const calculateDaysLeft = () => {
     const now = new Date();
-    const christmas = new Date(now.getFullYear() + (now > new Date(now.getFullYear(), 11, 25) ? 1 : 0), 11, 25);
+    const christmas = new Date(
+      now.getFullYear() + (now > new Date(now.getFullYear(), 11, 25) ? 1 : 0),
+      11,
+      25
+    );
     const diffTime = Math.abs(christmas - now);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     return diffDays;
@@ -33,7 +47,7 @@ function App() {
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
   const [daysLeft, setDaysLeft] = useState(calculateDaysLeft());
-  const [currentDate, setCurrentDate] = useState('');
+  const [currentDate, setCurrentDate] = useState("");
 
   useEffect(() => {
     const updateCountdown = () => {
@@ -47,13 +61,27 @@ function App() {
 
     const dateInterval = setInterval(() => {
       const now = new Date();
-      setCurrentDate(now.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }));
+      setCurrentDate(
+        now.toLocaleDateString(undefined, {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })
+      );
     }, 1000);
 
     // Initial date update with setTimeout
     setTimeout(() => {
       const now = new Date();
-      setCurrentDate(now.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }));
+      setCurrentDate(
+        now.toLocaleDateString(undefined, {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })
+      );
     }, 0);
 
     return () => {
@@ -63,8 +91,25 @@ function App() {
   }, []);
 
   const dayOrDays = daysLeft === 1 ? "Day" : "Days";
-  const christmasDate = new Date(new Date().getFullYear() + (new Date() > new Date(new Date().getFullYear(), 11, 25) ? 1 : 0), 11, 25);
-  const formattedChristmasDate = christmasDate.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  const christmasDate = new Date(
+    new Date().getFullYear() +
+      (new Date() > new Date(new Date().getFullYear(), 11, 25) ? 1 : 0),
+    11,
+    25
+  );
+  const formattedChristmasDate = christmasDate.toLocaleDateString(undefined, {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  const xMasGreetings = {
+    greetings: "Merry Christmas!",
+    message: "Have a Holly, Jolly Christmas.",
+  };
+
+  const daysCount = 0;
 
   return (
     <div id="app-container">
@@ -73,22 +118,29 @@ function App() {
           <p className="current-date">Today: {currentDate}</p>
           <div id="countdown-content">
             <h1>
-              {daysLeft === 0 ? (
+              {daysLeft === daysCount ? (
                 <div className="merry-christmas-container">
-                <Typewriter
-                  options={{
-                    strings: ['Merry Christmas!'],
-                    autoStart: true,
-                    loop: true,
-                    delay: 100, 
-                  }}
-                />
+                  <Typewriter
+                    options={{
+                      strings: [xMasGreetings.greetings],
+                      autoStart: true,
+                      loop: true,
+                      delay: 100,
+                    }}
+                  />
                 </div>
               ) : (
                 `Christmas in ${daysLeft} ${dayOrDays}`
               )}
-              </h1>
-            <p className="christmas-date">{formattedChristmasDate}</p>
+            </h1>
+            {/* <p className="christmas-date">{formattedChristmasDate}</p> */}
+
+            {daysLeft === daysCount ? (
+              <p className="christmas-date">{xMasGreetings.message}</p>
+            ) : (
+              <p className="christmas-date">{formattedChristmasDate}</p>
+            )}
+
             <DetailedCountdown timeLeft={timeLeft} />
           </div>
         </div>
