@@ -109,7 +109,7 @@ function App() {
     message: "Have a Holly, Jolly Christmas.",
   };
 
-  const daysCount = 0;
+  const daysCount = 365;
 
   return (
     <div id="app-container">
